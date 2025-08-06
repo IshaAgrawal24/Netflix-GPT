@@ -5,6 +5,8 @@
 - add routing (login / home page)
 - login form
 - signup form
+- validation of Sign In/Sign Up form
+- useRef hook
 
 
 # Features
