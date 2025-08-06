@@ -2,6 +2,9 @@
 
 - installing through Vite
 - Configured Tailwind CSS
+- add routing (login / home page)
+- login form
+- signup form
 
 
 # Features
