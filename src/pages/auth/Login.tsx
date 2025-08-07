@@ -10,6 +10,7 @@ const Login = () => {
   const [isSignInForm, setSignInForm] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>({});
 
+  const name = useRef<HTMLInputElement>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
 
@@ -18,8 +19,8 @@ const Login = () => {
   }
 
   const handleFormSubmit = () => {
-    const errorMessage = validate(email.current!.value, password.current!.value)
-    setErrorMessage(errorMessage)
+    const errorMessage = validate(email.current!.value, password.current!.value, name.current!.value);
+    setErrorMessage(errorMessage);
   }
 
   return (
@@ -39,7 +40,12 @@ const Login = () => {
 
             <form onSubmit={(e) => e.preventDefault()}>
 
-              {!isSignInForm && <input type="text" placeholder='Full Name' className='py-2 px-5 w-full border-1 rounded-sm border-white mb-8' />}
+              {!isSignInForm &&
+                <div className='mb-8'>
+                  <input ref={name} type="text" placeholder='Full Name' className='py-2 px-5 w-full border-1 rounded-sm border-white' />
+                  {errorMessage?.name && <span className='text-red-500'>{errorMessage?.name}</span>}
+                </div>
+              }
 
               <div className='mb-8'>
                 <input ref={email} type="text" placeholder='Email or Mobile number' className='py-2 px-5 w-full border-1 rounded-sm border-white' />
