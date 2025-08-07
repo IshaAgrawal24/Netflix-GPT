@@ -9,7 +9,8 @@
 - useRef hook
 - firebase setup
 - authentication (sign up user account in Firebase)
-
+- redux implementation
+- store user's data in redux 
 
 # Features
 - login/signup page

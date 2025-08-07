@@ -3,12 +3,14 @@ import Header from '../../components/Header';
 import { validate } from '../../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../utils/firebase';
+import { useNavigate } from 'react-router-dom';
 
 type ErrorMessage = {
   [key: string]: string;
 };
 
 const Login = () => {
+  const navigate = useNavigate()
   const [isSignInForm, setSignInForm] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>({});
 
@@ -36,8 +38,9 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          // ...
           console.log(user)
+          // localStorage.setItem("accessToken", user.accessToken)
+          navigate("/browse")
         })
         .catch((error) => {
           const errorCode = error.code;
