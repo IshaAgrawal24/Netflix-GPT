@@ -2,18 +2,16 @@ type ErrorMessage = {
     [key: string]: string;
 }
 
-export const validate = (email: string, password: string, name: string = "") => {
+const nameRegEx = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const passwordRegEx = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{4,60}$/;
+
+export const validate = (email: string, password: string, name?: string) => {
     let errorMessage: ErrorMessage = {};
 
-    const isName = /^[A-Za-z]+(?: [A-Za-z]+)*$/.test(name)
-    const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-    const isPassord = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{4,60}$/.test(password);
-
-    if (!isName) errorMessage["name"] = "Please enter a valid name.";
-    if (!isEmail) errorMessage["email"] = "Please enter a valid email address."
-    if (!isPassord) errorMessage["password"] = "Your password is not valid."
-
-    console.log(errorMessage)
+    if (name != undefined && !nameRegEx.test(name)) errorMessage["name"] = "Please enter a valid name.";
+    if (!emailRegEx.test(email)) errorMessage["email"] = "Please enter a valid email address."
+    if (!passwordRegEx.test(password)) errorMessage["password"] = "Your password is not valid."
 
     return errorMessage;
 }
