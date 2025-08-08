@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
-import Header from '../../components/Header';
 import { validate } from '../../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../utils/firebase';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../../components/header/Logo';
 
 type ErrorMessage = {
   [key: string]: string;
@@ -54,13 +54,11 @@ const Login = () => {
           const user = userCredential.user;
           console.log("success", user)
           setSignInForm(true)
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.error("Signup error:", errorCode, errorMessage);
-          // ..
         });
     }
   }
@@ -75,7 +73,7 @@ const Login = () => {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.5)_0%)]"></div>
 
       <div className="absolute inset-0 z-10  px-20">
-        <Header />
+        <Logo size={'md'}/>
         <div className='flex justify-center align-middle pt-6'>
           <div className='w-[40%] text-white px-20 py-10 bg-black/55'>
             <h2 className='text-3xl font-bold mb-8'>{isSignInForm ? "Sign In" : "Sign Up"}</h2>
